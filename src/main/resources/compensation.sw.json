@@ -5,6 +5,13 @@
   "name": "Workflow Error example",
   "description": "An example of how compensation works",
   "start": "printStatus",
+  "functions": [
+    {
+      "name": "greetFunction",
+      "type": "custom",
+      "operation": "sysout"
+    }
+  ],
   "states": [
     {
       "name": "printStatus",
@@ -58,7 +65,17 @@
     {
       "name": "finish_compensate",
       "type": "operation",
-      "actions": [],
+       "actions": [
+        {
+          "name": "greetAction",
+          "functionRef": {
+            "refName": "greetFunction",
+            "arguments": {
+              "message": ".greeting+.name"
+            }
+          }
+        }
+      ],
       "end": {
         "terminate": true
       }
